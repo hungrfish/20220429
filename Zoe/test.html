@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>bar-responsive</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.0.2 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <style>
+    .dNone {
+      display: none;
+    }
+  </style>
+
+</head>
+
+
+<body class="bg-dark text-light">
+
+  <div class="container-fruid bg-light px-5">
+    <div class="row ">
+      <div class="col m-3 d-flex">
+        <h3 class="text-danger fs-1 fw-bold"><a href="index.html"> Chart.js Homework</a></h3>
+      </div>
+      <div class="col d-flex flex-row flex-nowrap p-3 justify-content-end">
+        <button id="chinaBar" class="btn btn-danger m-2">Bar</button>
+        <button id="chinaLine" class="btn btn-danger m-2">Line</a></button>
+        <button id="chinaPie" class="btn btn-danger m-2">Pie</a></button>
+        <button id="chinaRadar" class="btn btn-danger m-2">Radar</a></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="chinaBarDiv" class="nmsl dNone container-md bg-light m-5 mx-auto">
+    <canvas id="chinaBarCt" class="p-5"></canvas>
+  </div>
+
+  <div id="chinaLineDiv" class="nmsl dNone container-md bg-light m-5 mx-auto">
+    <canvas id="chinaLineCt" class="p-5"></canvas>
+  </div>
+
+  <div id="chinaPieDiv" class="nmsl dNone container-md bg-light m-5 mx-auto">
+    <canvas id="chinaPieCt" class="p-5"></canvas>
+  </div>
+
+  <div id="chinaRadarDiv" class="nmsl dNone container-md bg-light m-5 mx-auto">
+    <canvas id="chinaRadarCt" class="p-5"></canvas>
+  </div>
+
+
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+  <script>
+    Chart.defaults.font.size = 20;
+    $(function() {
+
+        $('#chinaBar').click(function() {
+          $(".nmsl").addClass("dNone")
+          $('#chinaBarDiv').removeClass("dNone")
+        })
+        $('#chinaLine').click(function() {
+          $(".nmsl").addClass("dNone")
+          $('#chinaLineDiv').removeClass("dNone")
+        })
+        $('#chinaPie').click(function() {
+          $(".nmsl").addClass("dNone")
+          $('#chinaPieDiv').removeClass("dNone")
+        })
+        $('#chinaRadar').click(function() {
+          $(".nmsl").addClass("dNone")
+          $('#chinaRadarDiv').removeClass("dNone")
+        })
+
+
+    })
+
+    let ctxBar = document.getElementById("chinaBarCt");
+    let ctxLine = document.getElementById("chinaLineCt");
+    let ctxPie = document.getElementById("chinaPieCt");
+    let ctxRadar = document.getElementById("chinaRadarCt");
+
+    const labels = ["一月", "二月", "三月"];
+
+    
+    const dataBar = {
+      labels: labels,
+      datasets: [
+        {
+          label: '2020/01/22～2020/03/14中國每月平均每日確診病例死亡數',
+          data: [21,90,25],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+          ],
+          borderWidth: 1
+
+        },
+
+      ]
+    };
+
+    const dataLine = {
+      labels: labels,
+      datasets: [
+        {
+          label: '2020/01/22～2020/03/14中國每月平均每日確診病例數',
+          data: [980, 2398, 116],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+          ],
+          borderWidth: 1
+
+        },
+
+      ]
+    };
+
+    const dataPie = {
+      labels: ["死亡數","存活數",],
+      datasets: [
+        {
+          label: '2020/01/22～2020/03/14中國確診病例中死亡數比例',
+          data: [3193, 77784],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgba(255, 159, 64, )',
+          ],
+          borderWidth: 1
+
+        },
+
+      ]
+    };
+
+    const dataRadar = {
+      labels: labels,
+      datasets: [
+        {
+          label: '2020/01/22～2020/03/14中國每月平均每日確診病例及死亡數',
+          data: [21,90,25],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+          ],
+          borderWidth: 1
+
+        },
+        {
+          data: [980, 2398, 116],
+          backgroundColor: [
+          'rgb(54, 162, 235,0.2)',
+          'rgb(54, 162, 235,0.2)',
+          'rgb(255, 205, 86,0.2)',
+          ],
+          borderColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)',
+            
+          ],
+          borderWidth: 1
+
+        },
+
+      ]
+    };
+
+    const configBar = {
+      type: 'bar',
+      data: dataBar,
+      options: {
+        maintainAspectRatio: 1.6,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 25
+              }
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, }
+        }
+      },
+    };
+
+    const configLine = {
+      type: 'line',
+      data: dataLine,
+      options: {
+        maintainAspectRatio: 1.6,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 25
+              }
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, }
+        }
+      },
+    };
+
+    const configPie = {
+      type: 'pie',
+      data: dataPie,
+      options: {
+        maintainAspectRatio: 1.6,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 25
+              }
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, }
+        }
+      },
+    };
+
+    const configRadar = {
+      type: 'radar',
+      data: dataRadar,
+      options: {
+        maintainAspectRatio: 1.6,
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 25
+              }
+            }
+          }
+        },
+        scales: {
+          y: { beginAtZero: true, }
+        }
+      },
+    };
+    const chinaBarCt = new Chart(ctxBar, configBar)
+    const chinLinerCt = new Chart(ctxLine, configLine)
+    const chinaPieCt = new Chart(ctxPie, configPie)
+    const chinaRadarCt = new Chart(ctxRadar, configRadar)
+
+
+
+
+
+  </script>
+</body>
+
+</html>
